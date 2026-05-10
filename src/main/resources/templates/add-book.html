@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Book</title>
+
+    <style>
+        body{
+            font-family:Arial;
+            background:#f4f4f4;
+            padding:40px;
+        }
+
+        .form-box{
+            width:400px;
+            margin:auto;
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        input, textarea{
+            width:100%;
+            padding:10px;
+            margin-top:10px;
+            margin-bottom:20px;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            background:#007bff;
+            color:white;
+            border:none;
+            border-radius:8px;
+            font-size:16px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="form-box">
+
+    <h2>Add Book</h2>
+
+    <form action="/save" method="post">
+
+        <input type="text" name="title" placeholder="Book Title">
+
+        <input type="text" name="author" placeholder="Author">
+
+        <input type="number" name="price" placeholder="Price">
+
+        <input type="text" name="image" placeholder="Image URL">
+
+        <textarea name="description" placeholder="Description"></textarea>
+
+        <button type="submit">Save Book</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
