@@ -2,235 +2,126 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Online Bookstore</title>
-
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, sans-serif;
-        }
-
-        body{
-            background:#f4f4f4;
-            padding:30px;
-        }
-
-        h1{
-            text-align:center;
-            margin-bottom:30px;
-            color:#333;
-        }
-
-        .book-container{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:20px;
-        }
-
-        .book-card{
-            background:white;
-            border-radius:10px;
-            padding:20px;
-            box-shadow:0 4px 10px rgba(0,0,0,0.1);
-            transition:0.3s;
-        }
-
-        .book-card:hover{
-            transform:translateY(-5px);
-        }
-
-        .book-image{
-            width:100%;
-            height:300px;
-            object-fit:cover;
-            border-radius:10px;
-        }
-
-        .book-title{
-            font-size:22px;
-            margin-top:15px;
-            color:#222;
-        }
-
-        .book-author{
-            color:#666;
-            margin-top:8px;
-        }
-
-        .book-price{
-            color:green;
-            font-size:20px;
-            font-weight:bold;
-            margin-top:10px;
-        }
-
-        .book-description{
-            margin-top:10px;
-            color:#555;
-        }
-
-        .top-bar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:30px;
-}
-
-.add-btn{
-    background:#28a745;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:8px;
-    font-size:16px;
-    cursor:pointer;
-}
-
-.add-btn:hover{
-    background:#218838;
-}
-
-.delete-btn{
-    background:red;
-    color:white;
-    border:none;
-    padding:8px 14px;
-    border-radius:6px;
-    cursor:pointer;
-    margin-top:10px;
-}
-
-.delete-btn:hover{
-    background:darkred;
-}
-
-.cart-btn{
-    background:#007bff;
-    color:white;
-    border:none;
-    padding:8px 14px;
-    border-radius:6px;
-    cursor:pointer;
-    margin-top:10px;
-    margin-left:10px;
-}
-
-.cart-btn:hover{
-    background:#0056b3;
-}
-
-.cart-page-btn{
-    background:#ff9800;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:8px;
-    cursor:pointer;
-    margin-right:10px;
-    font-size:16px;
-}
-
-.cart-page-btn:hover{
-    background:#e68900;
-}
-
-.top-buttons{
-    display:flex;
-    justify-content:flex-end;
-    gap:15px;
-    margin-bottom:30px;
-}
-
-.cart-page-btn{
-    background:#ff9800;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:bold;
-}
-
-.cart-page-btn:hover{
-    background:#e68900;
-}
-
-.add-btn{
-    background:#28a745;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:bold;
-}
-
-.add-btn:hover{
-    background:#218838;
-}
-    </style>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 
 <body>
 
-<div class="top-bar">
-    <h1>📚 Online Bookstore</h1>
-<div class="top-buttons">
+<div class="page">
+
+<div class="topbar">
+    <div class="brand">
+        <div class="logo"><span>OB</span></div>
+        <div>
+            <h1>Online Bookstore</h1>
+            <p>Browse, add, and manage your cart</p>
+        </div>
+    </div>
+
+    <div class="navlinks">
+        <a href="/">Home</a>
+        <a href="/cart">Cart</a>
+        <a href="/add">Add Book</a>
+    </div>
+
+    <div class="actions">
 
     <a href="/cart">
-        <button class="cart-page-btn">
-            🛒 Cart
-        </button>
+        <button class="btn btn-warn">Cart</button>
     </a>
 
     <a href="/add">
-        <button class="add-btn">
-            + Add Book
-        </button>
+        <button class="btn btn-success">Add Book</button>
     </a>
 
+    </div>
 </div>
-    
+
+<div class="hero">
+    <div class="hero-inner">
+        <h2>Discover Your Next Great Read</h2>
+        <p>Explore books and build your cart. Use the search to quickly filter by title or author.</p>
+
+        <div class="searchbar">
+            <input id="bookSearch" type="text" placeholder="Search by title or author...">
+            <button class="btn btn-accent" type="button" onclick="clearSearch()">Clear</button>
+        </div>
+    </div>
 </div>
 
-<div class="book-container">
+<div class="section-title">Featured Collection</div>
 
-    <div class="book-card" th:each="book : ${books}">
+<div class="grid">
 
-        <img class="book-image"
+    <div class="card book-card" th:each="book : ${books}">
+
+        <img class="card-media"
              th:src="${book.image}"
+             onerror="this.onerror=null;this.src='/images/book-placeholder.svg';"
              alt="Book Image">
 
-        <h2 class="book-title"
-            th:text="${book.title}">
-        </h2>
+        <div class="under-image">
+            <a th:href="@{'/cart/add/' + ${book.id}}">
+                <button class="btn btn-accent" style="width:100%">Add to Cart</button>
+            </a>
+        </div>
 
-        <p class="book-author"
-           th:text="${book.author}">
-        </p>
+        <div class="card-body">
 
-        <p class="book-price">
-            ₹ <span th:text="${book.price}"></span>
-        </p>
+            <a th:href="@{'/book/' + ${book.id}}" style="text-decoration:none; color:inherit">
+                <h2 class="title book-title" th:text="${book.title}"></h2>
+            </a>
 
-        <p class="book-description"
-           th:text="${book.description}">
-        </p>
+            <p class="subtitle book-author" th:text="${book.author}"></p>
 
-        <a th:href="@{'/delete/' + ${book.id}}">
-    <button class="delete-btn">Delete</button>
-</a>
+            <p class="price">
+                ₹ <b th:text="${book.price}"></b>
+            </p>
 
-<a th:href="@{'/cart/add/' + ${book.id}}">
-    <button class="cart-btn">Add To Cart</button>
-</a>
+            <p class="desc" th:text="${book.description}"></p>
 
+            <div class="card-actions">
+                <a th:href="@{'/delete/' + ${book.id}}">
+                    <button class="btn btn-danger">Delete</button>
+                </a>
+
+                <a th:href="@{'/add'}">
+                    <button class="btn btn-success" type="button">Add New Book</button>
+                </a>
+            </div>
+
+        </div>
     </div>
 
 </div>
 
+</div>
+
+<script>
+    const searchInput = document.getElementById('bookSearch');
+    const cards = Array.from(document.querySelectorAll('.book-card'));
+
+    function normalize(s) {
+        return (s || '').toString().toLowerCase().trim();
+    }
+
+    function applySearch() {
+        const q = normalize(searchInput.value);
+        cards.forEach(card => {
+            const title = normalize(card.querySelector('.book-title')?.textContent);
+            const author = normalize(card.querySelector('.book-author')?.textContent);
+            const match = !q || title.includes(q) || author.includes(q);
+            card.style.display = match ? '' : 'none';
+        });
+    }
+
+    function clearSearch() {
+        searchInput.value = '';
+        applySearch();
+        searchInput.focus();
+    }
+
+    searchInput.addEventListener('input', applySearch);
+</script>
 </body>
 </html>

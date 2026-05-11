@@ -2,89 +2,69 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Cart</title>
-
-    <style>
-        body{
-            font-family:Arial;
-            background:#f4f4f4;
-            padding:30px;
-        }
-
-        h1{
-            text-align:center;
-            margin-bottom:30px;
-        }
-
-        .cart-container{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:20px;
-            display:flex;
-   
-    flex-wrap:wrap;
-    justify-content:center;
-        }
-
-        .cart-card{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    width:300px;
-    height:380px;
-}
-        
-
-        img{
-            width:300px;
-            height:180px;
-            object-fit:cover;
-            border-radius:10px;
-        }
-
-        .price{
-            color:green;
-            font-weight:bold;
-            margin-top:10px;
-            margin-bottom:10px;
-        }
-
-        .remove-btn{
-    background:red;
-    color:white;
-    border:none;
-    padding:8px 14px;
-    border-radius:6px;
-    cursor:pointer;
-    margin-top:10px;
-}
-
-.remove-btn:hover{
-    background:darkred;
-}
-    </style>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 
 <body>
 
-<h1>🛒 My Cart</h1>
+<div class="page">
 
-<div class="cart-container">
+    <div class="topbar">
+        <div class="brand">
+            <div class="logo"><span>OB</span></div>
+            <div>
+                <h1>My Cart</h1>
+                <p>Items you added from the store</p>
+            </div>
+        </div>
+        <div class="navlinks">
+            <a href="/">Home</a>
+            <a href="/add">Add Book</a>
+        </div>
+        <div class="actions">
+            <a href="/"><button class="btn btn-accent">Back to Store</button></a>
+        </div>
+    </div>
 
-    <div class="cart-card" th:each="item : ${cartItems}">
+    <div class="grid">
 
-        <img th:src="${item.image}">
+        <div class="card" th:each="item : ${cartItems}">
 
-        <h2 th:text="${item.title}"></h2>
+            <img class="card-media" th:src="${item.image}">
 
-        <p class="price">
-            ₹ <span th:text="${item.price}"></span>
-        </p>
+            <div class="card-body">
 
-        <a th:href="@{'/cart/delete/' + ${item.id}}">
-    <button class="remove-btn">Remove</button>
-</a>
+                <h2 class="title" th:text="${item.title}"></h2>
 
+                <p class="price">
+                    ₹ <b th:text="${item.price}"></b>
+                </p>
+
+                <div class="card-actions">
+                    <a th:href="@{'/cart/delete/' + ${item.id}}">
+                        <button class="btn btn-danger">Remove</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+        <h2>Order Summary</h2>
+        <p class="help">Total</p>
+        <div class="price" style="margin-top:6px">
+            ₹ <b th:text="${total}"></b>
+        </div>
+
+        <div class="card-actions" style="margin-top:14px">
+            <a href="/cart/checkout">
+                <button class="btn btn-success" style="width:100%">Buy / Checkout</button>
+            </a>
+        </div>
+
+        <p class="help" th:if="${param.success}" style="margin-top:10px">Purchase complete. Cart cleared.</p>
     </div>
 
 </div>

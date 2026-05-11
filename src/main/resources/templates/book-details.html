@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Details</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+<div class="page">
+
+    <div class="topbar">
+        <div class="brand">
+            <div class="logo"><span>OB</span></div>
+            <div>
+                <h1 th:text="${book.title}">Book</h1>
+                <p th:text="${book.author}">Author</p>
+            </div>
+        </div>
+        <div class="navlinks">
+            <a href="/">Home</a>
+            <a href="/cart">Cart</a>
+        </div>
+        <div class="actions">
+            <a href="/"><button class="btn btn-accent">Back</button></a>
+        </div>
+    </div>
+
+    <div class="grid" style="grid-template-columns: 1.2fr .8fr">
+        <div class="card">
+            <img class="card-media"
+                 style="height:420px"
+                 th:src="${book.image}"
+                 onerror="this.onerror=null;this.src='/images/book-placeholder.svg';"
+                 alt="Book Image">
+            <div class="under-image">
+                <a th:href="@{'/cart/add/' + ${book.id}}">
+                    <button class="btn btn-accent" style="width:100%">Add to Cart</button>
+                </a>
+            </div>
+            <div class="card-body">
+                <p class="price">₹ <b th:text="${book.price}">0</b></p>
+                <p class="desc" th:text="${book.description}">Description</p>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Quick actions</h2>
+            <div class="card-actions">
+                <a href="/cart"><button class="btn btn-warn" style="width:100%">Go to Cart</button></a>
+                <a href="/add"><button class="btn btn-success" style="width:100%">Add New Book</button></a>
+            </div>
+            <p class="help" style="margin-top:10px">Tip: Add book image URL (ends with .jpg/.png) for best results.</p>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+

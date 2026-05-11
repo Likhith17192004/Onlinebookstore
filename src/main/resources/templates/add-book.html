@@ -2,63 +2,65 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Book</title>
-
-    <style>
-        body{
-            font-family:Arial;
-            background:#f4f4f4;
-            padding:40px;
-        }
-
-        .form-box{
-            width:400px;
-            margin:auto;
-            background:white;
-            padding:30px;
-            border-radius:10px;
-            box-shadow:0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        input, textarea{
-            width:100%;
-            padding:10px;
-            margin-top:10px;
-            margin-bottom:20px;
-        }
-
-        button{
-            width:100%;
-            padding:12px;
-            background:#007bff;
-            color:white;
-            border:none;
-            border-radius:8px;
-            font-size:16px;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 
 <body>
 
-<div class="form-box">
+<div class="page">
 
-    <h2>Add Book</h2>
+    <div class="topbar">
+        <div class="brand">
+            <div class="logo"><span>OB</span></div>
+            <div>
+                <h1>Add Book</h1>
+                <p>Create a new listing for the store</p>
+            </div>
+        </div>
+        <div class="navlinks">
+            <a href="/">Home</a>
+            <a href="/cart">Cart</a>
+        </div>
+        <div class="actions">
+            <a href="/"><button class="btn btn-accent">Back</button></a>
+            <a href="/cart"><button class="btn btn-warn">Cart</button></a>
+        </div>
+    </div>
 
-    <form action="/save" method="post">
+    <div class="panel">
 
-        <input type="text" name="title" placeholder="Book Title">
+        <form action="/save" method="post">
 
-        <input type="text" name="author" placeholder="Author">
+            <label class="field">
+                <div class="help">Title</div>
+                <input class="input" type="text" name="title" placeholder="Eg. Atomic Habits" required>
+            </label>
 
-        <input type="number" name="price" placeholder="Price">
+            <label class="field">
+                <div class="help">Author</div>
+                <input class="input" type="text" name="author" placeholder="Eg. James Clear" required>
+            </label>
 
-        <input type="text" name="image" placeholder="Image URL">
+            <label class="field">
+                <div class="help">Price (₹)</div>
+                <input class="input" type="number" name="price" placeholder="Eg. 499" min="0" step="0.01" required>
+            </label>
 
-        <textarea name="description" placeholder="Description"></textarea>
+            <label class="field">
+                <div class="help">Image URL</div>
+                <input class="input" type="text" name="image" placeholder="Paste a direct image link (https://...jpg/png)" required>
+            </label>
 
-        <button type="submit">Save Book</button>
+            <label class="field">
+                <div class="help">Description</div>
+                <textarea class="textarea" name="description" placeholder="Short summary of the book..." required></textarea>
+            </label>
 
-    </form>
+            <button class="btn btn-success" type="submit" style="width:100%">Save Book</button>
+
+        </form>
+
+    </div>
 
 </div>
 

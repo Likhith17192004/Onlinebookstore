@@ -26,6 +26,16 @@ private CartRepository cartRepository;
 
         
     }
+
+    @GetMapping("/book/{id}")
+    public String bookDetails(@PathVariable Long id, Model model) {
+        Book book = bookRepository.findById(id).orElse(null);
+        if (book == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("book", book);
+        return "book-details";
+    }
     @GetMapping("/add")
 public String addBookPage() {
     return "add-book";
@@ -67,6 +77,8 @@ public String showCart(Model model){
 
     model.addAttribute("cartItems",
             cartRepository.findAll());
+    double total = cartRepository.findAll().stream().mapToDouble(Cart::getPrice).sum();
+    model.addAttribute("total", total);
 
     return "cart";
 }
@@ -77,5 +89,16 @@ public String removeFromCart(@PathVariable Long id){
     cartRepository.deleteById(id);
 
     return "redirect:/cart";
+}
+
+@GetMapping("/cart/checkout")
+public String checkout(){
+    cartRepository.deleteAll();
+    return "redirect:/checkout";
+}
+
+@GetMapping("/checkout")
+public String checkoutPage() {
+    return "checkout";
 }
 }

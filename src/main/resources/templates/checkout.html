@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+<div class="page">
+
+    <div class="topbar">
+        <div class="brand">
+            <div class="logo"><span>OB</span></div>
+            <div>
+                <h1>Order Confirmed</h1>
+                <p>Thank you for your purchase</p>
+            </div>
+        </div>
+        <div class="navlinks">
+            <a href="/">Home</a>
+            <a href="/cart">Cart</a>
+        </div>
+        <div class="actions">
+            <a href="/"><button class="btn btn-accent">Continue Browsing</button></a>
+        </div>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+        <h2>Success</h2>
+        <p class="help">Your cart has been checked out and cleared.</p>
+        <div class="card-actions" style="margin-top:14px">
+            <a href="/"><button class="btn btn-success" style="width:100%">Back to Home</button></a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+
