@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Online Bookstore - Project Showcase</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #22c55e;
+      --link: #60a5fa;
+      --border: #1f2937;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #020617, #0b1220);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .wrap {
+      width: min(920px, 92%);
+      margin: 32px auto 56px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+    h1, h2 { margin: 0 0 10px; }
+    p { margin: 8px 0; color: var(--muted); }
+    .pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #14532d;
+      background: #052e16;
+      color: #86efac;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    ul { margin: 10px 0; padding-left: 18px; }
+    li { margin: 6px 0; color: var(--text); }
+    code {
+      background: #0b1220;
+      border: 1px solid #1e293b;
+      color: #cbd5e1;
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+    .btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      color: #0b1220;
+      background: var(--accent);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+    .btn.secondary {
+      background: #1f2937;
+      color: #d1d5db;
+      border: 1px solid #374151;
+    }
+    a { color: var(--link); }
+    .small { font-size: 13px; color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <div class="pill">Internship Project Showcase</div>
+      <h1>Online Bookstore</h1>
+      <p>
+        A Spring Boot full-stack web app for book browsing, details, cart management, and checkout.
+      </p>
+      <div class="btns">
+        <a class="btn" href="https://github.com/Likhith17192004/Onlinebookstore" target="_blank" rel="noreferrer">View Source Code</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Core Features</h2>
+      <ul>
+        <li>Home page with searchable catalog</li>
+        <li>Book details page</li>
+        <li>Add to cart / remove from cart</li>
+        <li>Checkout flow</li>
+        <li>20 seeded books with cover images</li>
+        <li>Fallback image support for broken cover links</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Technology Stack</h2>
+      <ul>
+        <li>Java 17</li>
+        <li>Spring Boot + Spring MVC + Thymeleaf</li>
+        <li>Spring Data JPA</li>
+        <li>H2 in-memory database</li>
+        <li>Maven Wrapper</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>How to Run</h2>
+      <p>From repository root:</p>
+      <p><code>.\mvnw.cmd spring-boot:run</code> (Windows)</p>
+      <p><code>./mvnw spring-boot:run</code> (Mac/Linux)</p>
+      <p>Then open <code>http://localhost:8080/</code></p>
+      <p class="small">
+        Note: GitHub Pages serves this showcase page only. The actual app runs as a Java server locally or on cloud hosting.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
